@@ -38,7 +38,7 @@ public enum Queue{
     static var Background : Int = Int(QOS_CLASS_BACKGROUND.rawValue)
   }
   
-  public static var Main : () -> dispatch_queue_t = {
+  public static var Main : dispatch_queue_t {
     return dispatch_get_main_queue()
   }
   public static var Global : (dispatch_queue_priority_t) -> dispatch_queue_t = { priority in
@@ -69,8 +69,8 @@ public enum Dispatch {
 //MARK: Helpers
 
 public extension Queue {
-  public static var GlobalUserInteractive : () -> dispatch_queue_t = { return Global(Queue.Priority.UserInteractive) }
-  public static var GlobalUserInitiated: () -> dispatch_queue_t = { return Global(Queue.Priority.UserInitiated) }
-  public static var GlobalUtility: () -> dispatch_queue_t = { return Global(Queue.Priority.Utility) }
-  public static var GlobalBackground: () -> dispatch_queue_t = { return Global(Queue.Priority.Background) }
+  public static var GlobalUserInteractive : dispatch_queue_t { return Global(Queue.Priority.UserInteractive) }
+  public static var GlobalUserInitiated : dispatch_queue_t { return Global(Queue.Priority.UserInitiated) }
+  public static var GlobalUtility : dispatch_queue_t { return Global(Queue.Priority.Utility) }
+  public static var GlobalBackground : dispatch_queue_t { return Global(Queue.Priority.Background) }
 }
