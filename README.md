@@ -6,6 +6,8 @@
 ![Podspec](https://img.shields.io/cocoapods/v/Dispatch.svg)
 [![License](https://img.shields.io/cocoapods/l/Dispatch.svg)](https://github.com/JARMourato/Dispatch/master/LICENSE)
 
+[![codebeat badge](https://codebeat.co/badges/b1709704-b1b6-40fa-a38f-0962f72aa264)](https://codebeat.co/projects/github-com-jarmourato-dispatch)
+
 ## Installation
 
 Dispatch is available through [CocoaPods](http://cocoapods.org). To install
