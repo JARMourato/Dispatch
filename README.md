@@ -88,7 +88,7 @@ let customSerialQueue = Queue.custom("custom.serial.queue.dispatch", Queue.Atrib
 
 ```swift
 let priority = 0 // or you use one of the Global priorities (ex: Queue.Priority.UserInteractive)
-let globalQueue = Queue.Global(priority)
+let globalQueue = Queue.global(priority)
 
 // For comodity there are helpers for getting the Global queues
 
