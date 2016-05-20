@@ -22,13 +22,13 @@ pod 'Dispatch'
 ### Basic
 
 ```swift
-Dispatch.Async(dispatch_get_main_queue()) {
+Dispatch.async(dispatch_get_main_queue()) {
   //Code to be run on the main thread
 }
 
 Or using the helpers provided by Dispatch.Queue enum 
 
-Dispatch.Async(Queue.Main) {
+Dispatch.async(Queue.main) {
   //Code to be run on the main thread
 }
 ```
@@ -38,7 +38,7 @@ Dispatch.Async(Queue.Main) {
 #### Async
 
 ```swift
-Dispatch.Async(Queue.Main) {
+Dispatch.async(Queue.main) {
   //Code to be run on the main thread
 }
 ```
@@ -47,7 +47,7 @@ Dispatch.Async(Queue.Main) {
 
 ```swift
 let someCustomQueue = dispatch_queue_create("custom.queue.dispatch", DISPATCH_QUEUE_CONCURRENT)
-Dispatch.Sync(someCustomQueue) {
+Dispatch.sync(someCustomQueue) {
   //Code to be synchronously on someCustomQueue
 }
 ```
@@ -55,7 +55,7 @@ Dispatch.Sync(someCustomQueue) {
 #### After
 
 ```swift
-Dispatch.After(1.0, queue: Queue.Main) {
+Dispatch.after(1.0, queue: Queue.main) {
   //Code to be run on the main thread after 1 second
 }
 ```
@@ -64,7 +64,7 @@ Dispatch.After(1.0, queue: Queue.Main) {
 
 ```swift
 let token : dispatch_once_t
-Dispatch.Once(&token) {
+Dispatch.once(&token) {
   //Code to be run only once in App lifetime
 }
 ```
@@ -74,14 +74,14 @@ Dispatch.Once(&token) {
 #### Main queue
 
 ```swift
-let mainQueue = Queue.Main 
+let mainQueue = Queue.main 
 ```
 
 #### Custom queue
 
 ```swift
-let customConcurrentQueue = Queue.Custom("custom.concurrent.queue.dispatch", Queue.Atribute.Concurrent)
-let customSerialQueue = Queue.Custom("custom.serial.queue.dispatch", Queue.Atribute.Serial)
+let customConcurrentQueue = Queue.custom("custom.concurrent.queue.dispatch", Queue.Atribute.concurrent)
+let customSerialQueue = Queue.custom("custom.serial.queue.dispatch", Queue.Atribute.serial)
 ```
 
 #### Global queues
@@ -92,10 +92,10 @@ let globalQueue = Queue.Global(priority)
 
 // For comodity there are helpers for getting the Global queues
 
-let globalUserInteractiveQueue = Queue.GlobalUserInteractive
-let globalUserInitiatedQueue = Queue.GlobalUserInitiated
-let globalUtilityQueue = Queue.GlobalUtility
-let globalBackgroundQueue = Queue.GlobalBackground
+let globalUserInteractiveQueue = Queue.globalUserInteractive
+let globalUserInitiatedQueue = Queue.globalUserInitiated
+let globalUtilityQueue = Queue.globalUtility
+let globalBackgroundQueue = Queue.globalBackground
 ```
 
 ## Author
