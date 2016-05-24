@@ -129,7 +129,7 @@ public struct Semaphore {
   
 }
 
-public class Dispatch {
+public enum Dispatch {
   static func async(closure: DispatchClosure) {
     async(Queue.main, closure: closure)
   }
