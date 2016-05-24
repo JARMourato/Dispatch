@@ -146,6 +146,10 @@ public class Dispatch {
     dispatch_once(&token, closure)
   }
     
+  static func after(time: NSTimeInterval, closure: DispatchClosure) {
+     after(time, queue: Queue.main, closure: closure)
+  }
+    
   static func after(time: NSTimeInterval, queue: dispatch_queue_t, closure: DispatchClosure) {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, getTimeout(time)), queue, closure)
   }
