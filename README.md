@@ -25,10 +25,20 @@ pod 'Dispatch'
 Dispatch.async(dispatch_get_main_queue()) {
   //Code to be run on the main thread
 }
+```
 
-Or using the helpers provided by Dispatch.Queue enum 
+##### Or using the helpers provided by Dispatch.Queue enum 
 
+```swift
 Dispatch.async(Queue.main) {
+  //Code to be run on the main thread
+}
+```
+
+##### Or using the overloaded method to run on the main thread
+
+```swift
+Dispatch.async {
   //Code to be run on the main thread
 }
 ```
@@ -56,6 +66,13 @@ Dispatch.sync(someCustomQueue) {
 
 ```swift
 Dispatch.after(1.0, queue: Queue.main) {
+  //Code to be run on the main thread after 1 second
+}
+```
+##### Or using the overloaded method to run on the main thread
+
+```swift
+Dispatch.after(1.0) {
   //Code to be run on the main thread after 1 second
 }
 ```
