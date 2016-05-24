@@ -69,6 +69,13 @@ Dispatch.after(1.0, queue: Queue.main) {
   //Code to be run on the main thread after 1 second
 }
 ```
+##### Or using the overloaded method to run on the main thread
+
+```swift
+Dispatch.after(1.0) {
+  //Code to be run on the main thread after 1 second
+}
+```
 
 #### Once
 
