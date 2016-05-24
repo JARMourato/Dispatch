@@ -10,12 +10,27 @@
 
 ## Installation
 
+#### CocoaPods
+
 Dispatch is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
 pod 'Dispatch'
 ```
+
+And then simply
+
+``` swift
+import DispatchFramework
+```
+
+And your good to go!
+
+#### Manually
+
+1. Download and drop ```Dispatch.swift``` anywhere you like in your project.  
+2. That's it.
 
 ## Usage
 
