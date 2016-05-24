@@ -45,9 +45,11 @@ public enum Queue{
   public static var main : dispatch_queue_t {
     return dispatch_get_main_queue()
   }
+    
   public static var global : (dispatch_queue_priority_t) -> dispatch_queue_t = { priority in
     return dispatch_get_global_queue(priority, 0)
   }
+    
   public static var custom : (String, dispatch_queue_attr_t) -> dispatch_queue_t = { identifier, attribute in
     return dispatch_queue_create(identifier, attribute)
   }
