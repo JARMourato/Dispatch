@@ -115,9 +115,16 @@ let globalUtilityQueue = Queue.globalUtility
 let globalBackgroundQueue = Queue.globalBackground
 ```
 
-## Author
+## TODO
+
+- [ ] Chaining
+- [ ] Unit Tests
+- [ ] More examples
+
+## Authors
 
 João Mourato, joao.armourato@gmail.com
+Gabriel Peart
 
 ## License
 
