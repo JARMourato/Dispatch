@@ -117,7 +117,7 @@ let globalBackgroundQueue = Queue.globalBackground
 
 ## TODO
 
-- [ ] Chaining
+- [ ] Chainable methods
 - [ ] Unit Tests
 - [ ] Travis CI
 - [ ] More examples
