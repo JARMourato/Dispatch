@@ -130,9 +130,18 @@ let globalUtilityQueue = Queue.globalUtility
 let globalBackgroundQueue = Queue.globalBackground
 ```
 
-## Author
+## TODO
 
-João Mourato, joao.armourato@gmail.com
+- [ ] Chainable methods
+- [ ] Unit Tests
+- [ ] Travis CI
+- [ ] More examples
+
+## Authors
+
+- João Mourato, joao.armourato@gmail.com
+
+- Gabriel Peart
 
 ## License
 
