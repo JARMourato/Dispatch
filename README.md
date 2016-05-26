@@ -123,8 +123,9 @@ let globalBackgroundQueue = Queue.globalBackground
 
 ## Authors
 
-João Mourato, joao.armourato@gmail.com
-Gabriel Peart
+- João Mourato, joao.armourato@gmail.com
+
+- Gabriel Peart
 
 ## License
 
