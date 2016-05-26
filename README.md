@@ -119,6 +119,7 @@ let globalBackgroundQueue = Queue.globalBackground
 
 - [ ] Chaining
 - [ ] Unit Tests
+- [ ] Travis CI
 - [ ] More examples
 
 ## Authors
