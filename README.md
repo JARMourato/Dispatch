@@ -7,7 +7,6 @@
 [![License](https://img.shields.io/cocoapods/l/Dispatch.svg)](https://github.com/JARMourato/Dispatch/master/LICENSE)
 
 [![codebeat badge](https://codebeat.co/badges/b1709704-b1b6-40fa-a38f-0962f72aa264)](https://codebeat.co/projects/github-com-jarmourato-dispatch)
-
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 ## Installation
