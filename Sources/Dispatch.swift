@@ -1,7 +1,7 @@
 /*
  The MIT License (MIT)
  
- Copyright (c) 2016 João Mourato
+ Copyright (c) 2016 DynamicThreads
  
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +21,7 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
  */
+
 import Foundation
 
 public typealias DispatchClosure = (Void)->(Void)
@@ -176,6 +177,10 @@ public enum Dispatch {
     
   static func semaphore(value : Int = 0) -> Semaphore {
     return Semaphore(value: value)
+  }
+  
+  static var chain : Chain {
+    return ChainStack()
   }
   
 }

@@ -4,9 +4,9 @@
 ![Platforms](https://img.shields.io/cocoapods/p/Dispatch.svg?style=flat)
 
 ![Podspec](https://img.shields.io/cocoapods/v/Dispatch.svg)
-[![License](https://img.shields.io/cocoapods/l/Dispatch.svg)](https://github.com/JARMourato/Dispatch/master/LICENSE)
+[![License](https://img.shields.io/cocoapods/l/Dispatch.svg)](https://github.com/DynamicThreads/Dispatch/master/LICENSE)
 
-[![codebeat badge](https://codebeat.co/badges/b1709704-b1b6-40fa-a38f-0962f72aa264)](https://codebeat.co/projects/github-com-jarmourato-dispatch)
+[![codebeat badge](https://codebeat.co/badges/b1709704-b1b6-40fa-a38f-0962f72aa264)](https://codebeat.co/projects/github-com-dynamicthreads-dispatch)
 
 ## Installation
 
