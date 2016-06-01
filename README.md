@@ -132,6 +132,7 @@ let globalBackgroundQueue = Queue.globalBackground
 
 ## TODO
 
+- [ ] Carthage compatible
 - [ ] Chainable methods
 - [ ] Unit Tests
 - [ ] Travis CI
@@ -139,7 +140,7 @@ let globalBackgroundQueue = Queue.globalBackground
 
 ## Authors
 
-- João Mourato, joao.armourato@gmail.com
+- João Mourato, joao.armourato@gmail.com
 
 - Gabriel Peart
 
