@@ -24,10 +24,18 @@
 
 import XCTest
 
+@testable import DispatchFramework
+
 class Dispatch_Tests: XCTestCase {
   
-  func test_chain() {
-    XCAssertTrue(true)
+  func test_simple_chain() {
+    var number : Int = 0
+    Dispatch.chain.async(Queue.globalBackground) {
+        XCTAssert(number == 0)
+        number = 1;
+      }.async {
+        XCTAssert(number == 1)
+      }
   }
  
 }
