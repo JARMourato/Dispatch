@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage         = "https://github.com/DynamicThreads/Dispatch"
   s.license          = 'MIT'
   s.author           = { "João Mourato" => "joao.armourato@gmail.com", "Gabriel Peart" => "gabriel.peart@me.com" }
-  s.source           = { :git => "https://github.com/DynamicThreads/Dispatch", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/DynamicThreads/Dispatch.git", :tag => s.version.to_s }
   s.ios.deployment_target = '8.0'
   s.source_files = 'Sources/*.swift'
   s.module_name = 'DispatchFramework'
