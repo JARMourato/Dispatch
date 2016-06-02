@@ -2,8 +2,8 @@
 
 |**Branch**| **Status** |
 |---|---|
-|**master** |[![Bunch Status](https://travis-ci.org/DynamicThreads/Dispatch.svg?branch=master)](https://travis-ci.com/CabonlineTeam/Cabonline-iPhone)|
-|**develop** |[![Bunch Status](https://travis-ci.org/DynamicThreads/Dispatch.svg?branch=develop)](https://travis-ci.com/CabonlineTeam/Cabonline-iPhone)|
+|**master** |[![Bunch Status](https://travis-ci.org/DynamicThreads/Dispatch.svg?branch=master)](https://travis-ci.org/DynamicThreads/Dispatch)|
+|**develop** |[![Bunch Status](https://travis-ci.org/DynamicThreads/Dispatch.svg?branch=develop)](https://travis-ci.org/DynamicThreads/Dispatch)|
 
 ## Dispatch
 
