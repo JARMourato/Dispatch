@@ -16,6 +16,7 @@
 
 
 [![codebeat badge](https://codebeat.co/badges/b1709704-b1b6-40fa-a38f-0962f72aa264)](https://codebeat.co/projects/github-com-dynamicthreads-dispatch)
+[![codecov](https://codecov.io/gh/DynamicThreads/Dispatch/branch/master/graph/badge.svg)](https://codecov.io/gh/DynamicThreads/Dispatch)
 
 ## Installation
 
