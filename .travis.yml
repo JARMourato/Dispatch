@@ -1,0 +1,19 @@
+language: swift
+osx_image: xcode7.3
+xcode_sdk: iphonesimulator
+
+cache:
+  bundler: true
+
+before_install:
+  - brew update
+  # - brew outdated xctool || brew upgrade xctool
+  - sudo gem install xcpretty
+
+script: 
+  # - xctool -project Dispatch.xcodeproj -scheme Dispatch-iOS -reporter pretty build-tests CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+  # - xctool -project Dispatch.xcodeproj -scheme Dispatch-OSX -reporter pretty build-tests CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+  # - xctool -project Dispatch.xcodeproj -scheme Dispatch-iOS -reporter pretty -sdk iphonesimulator run-tests ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO
+
+  - xcodebuild -project Dispatch.xcodeproj -scheme Dispatch-iOS -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6s,OS=9.3' build
+  - xcodebuild -project Dispatch.xcodeproj -scheme Dispatch-iOS -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6s,OS=9.3' test | xcpretty --test --color

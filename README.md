@@ -1,10 +1,19 @@
-# Dispatch
+## Build Status
+
+|**Branch**| **Status** |
+|---|---|
+|**master** |[![Bunch Status](https://travis-ci.org/DynamicThreads/Dispatch.svg?branch=master)](https://travis-ci.com/CabonlineTeam/Cabonline-iPhone)|
+|**develop** |[![Bunch Status](https://travis-ci.org/DynamicThreads/Dispatch.svg?branch=develop)](https://travis-ci.com/CabonlineTeam/Cabonline-iPhone)|
+
+## Dispatch
 
 [![Swift 2.2](https://img.shields.io/badge/Swift-2.2-orange.svg?style=flat)](https://developer.apple.com/swift/)
 ![Platforms](https://img.shields.io/cocoapods/p/Dispatch.svg?style=flat)
-
-![Podspec](https://img.shields.io/cocoapods/v/Dispatch.svg)
 [![License](https://img.shields.io/cocoapods/l/Dispatch.svg)](https://github.com/DynamicThreads/Dispatch/master/LICENSE)
+
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) 
+![Podspec](https://img.shields.io/cocoapods/v/Dispatch.svg)
+
 
 [![codebeat badge](https://codebeat.co/badges/b1709704-b1b6-40fa-a38f-0962f72aa264)](https://codebeat.co/projects/github-com-dynamicthreads-dispatch)
 
@@ -18,6 +27,27 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod 'Dispatch'
 ```
+
+## Carthage
+----------------
+
+[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks.
+
+You can install Carthage with [Homebrew](http://brew.sh/) using the following command:
+
+```bash
+$ brew update
+$ brew install carthage
+```
+
+To integrate Dispatch into your Xcode project using Carthage, specify it in your `Cartfile`:
+
+```ogdl
+github "DynamicThreads/Dispatch"
+```
+
+Run `carthage update` to fetch the Dispatch library and drag into your Xcode project.
+
 
 And then simply
 
@@ -132,10 +162,10 @@ let globalBackgroundQueue = Queue.globalBackground
 
 ## TODO
 
-- [ ] Carthage compatible
-- [ ] Chainable methods
+- [X] Carthage compatible
+- [X] Chainable methods
+- [X] Travis CI
 - [ ] Unit Tests
-- [ ] Travis CI
 - [ ] More examples
 
 ## Authors
