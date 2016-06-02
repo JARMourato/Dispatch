@@ -17,3 +17,6 @@ script:
 
   - xcodebuild -project Dispatch.xcodeproj -scheme Dispatch-iOS -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6,OS=8.1' build
   - xcodebuild -project Dispatch.xcodeproj -scheme Dispatch-iOS -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6,OS=8.1' test | xcpretty --test --color
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
