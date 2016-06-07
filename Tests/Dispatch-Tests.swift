@@ -35,19 +35,37 @@ class Dispatch_Tests: XCTestCase {
     override func tearDown() {
         super.tearDown()
     }
-  
-    // TODO: Write proper tests
-    func testSimpleChain() {
-        XCTAssertTrue(true)
     
-        /*
-         var number: Int = 0
-         Dispatch.chain.async(Queue.globalBackground) {
-            XCTAssert(number == 0)
-            number = 1;
-         }.async {
-            XCTAssert(number == 1)
-         } */
+    func testBasicAsync() {
+        let expectation = expectationWithDescription("Wait for Dispatch Async")
+        let delay = 1.0
+        
+        Dispatch.after(delay) {
+            expectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(delay, handler: nil)
+    }
+  
+    func testBasicChain() {
+        let expectation = expectationWithDescription("Wait for Dispatch Chain Async")
+        let delay = 1.0
+        var number: Int = 0
+        var hasPassedByAsync = false
+        
+        Dispatch.chain.after(delay) {
+            if (!hasPassedByAsync) {
+                XCTFail()
+                return
+            }
+            XCTAssertEqual(number, 1)
+            expectation.fulfill()
+        }.async {
+            hasPassedByAsync = true
+            XCTAssertEqual(number, 0)
+            number = 1
+        }
+        
+        waitForExpectationsWithTimeout(delay, handler: nil)
     }
  
 }
