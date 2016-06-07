@@ -166,7 +166,7 @@ let globalBackgroundQueue = Queue.globalBackground
 - [X] Carthage compatible
 - [X] Chainable methods
 - [X] Travis CI
-- [ ] Unit Tests
+- [X] Unit Tests
 - [ ] More examples
 
 ## Authors
