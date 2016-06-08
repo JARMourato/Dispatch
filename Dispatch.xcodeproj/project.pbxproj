@@ -9,16 +9,14 @@
 /* Begin PBXBuildFile section */
 		C43B84C41CFDD23E004537DD /* Dispatch.h in Headers */ = {isa = PBXBuildFile; fileRef = C43B84C31CFDD23E004537DD /* Dispatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C43B84DB1CFDD3B1004537DD /* Dispatch.h in Headers */ = {isa = PBXBuildFile; fileRef = C43B84C31CFDD23E004537DD /* Dispatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C43B84DC1CFDD3F3004537DD /* Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B84D71CFDD302004537DD /* Chain.swift */; };
 		C43B84DD1CFDD3F3004537DD /* Dispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B84D81CFDD302004537DD /* Dispatch.swift */; };
-		C43B84DE1CFDD3F3004537DD /* Chain.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B84D71CFDD302004537DD /* Chain.swift */; };
 		C43B84DF1CFDD3F3004537DD /* Dispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B84D81CFDD302004537DD /* Dispatch.swift */; };
 		C43B84F01CFDD6FA004537DD /* DispatchFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43B84C01CFDD23D004537DD /* DispatchFramework.framework */; };
 		C43B84FF1CFDD70D004537DD /* DispatchFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43B84CE1CFDD2AA004537DD /* DispatchFramework.framework */; };
 		C43B85091CFDD7A8004537DD /* Dispatch-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B85061CFDD7A4004537DD /* Dispatch-Tests.swift */; };
 		C43B850A1CFDD7A8004537DD /* Dispatch-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B85061CFDD7A4004537DD /* Dispatch-Tests.swift */; };
-		C43B85101CFF1EBF004537DD /* Synchronous.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B850F1CFF1EBF004537DD /* Synchronous.swift */; };
-		C43B85111CFF1EBF004537DD /* Synchronous.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B850F1CFF1EBF004537DD /* Synchronous.swift */; };
+		C4A93F991D086D98008F0AE2 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A93F981D086D98008F0AE2 /* Helpers.swift */; };
+		C4A93F9A1D086D98008F0AE2 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A93F981D086D98008F0AE2 /* Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +40,6 @@
 		C43B84C01CFDD23D004537DD /* DispatchFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DispatchFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C43B84C31CFDD23E004537DD /* Dispatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dispatch.h; sourceTree = "<group>"; };
 		C43B84CE1CFDD2AA004537DD /* DispatchFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DispatchFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C43B84D71CFDD302004537DD /* Chain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chain.swift; sourceTree = "<group>"; };
 		C43B84D81CFDD302004537DD /* Dispatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dispatch.swift; sourceTree = "<group>"; };
 		C43B84D91CFDD302004537DD /* Info-iOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
 		C43B84DA1CFDD302004537DD /* Info-OSX.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-OSX.plist"; sourceTree = "<group>"; };
@@ -54,7 +51,7 @@
 		C43B85061CFDD7A4004537DD /* Dispatch-Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dispatch-Tests.swift"; sourceTree = "<group>"; };
 		C43B85071CFDD7A4004537DD /* Info-iOS-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iOS-Tests.plist"; sourceTree = "<group>"; };
 		C43B85081CFDD7A4004537DD /* Info-OSX-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-OSX-Tests.plist"; sourceTree = "<group>"; };
-		C43B850F1CFF1EBF004537DD /* Synchronous.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Synchronous.swift; sourceTree = "<group>"; };
+		C4A93F981D086D98008F0AE2 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,9 +112,8 @@
 		C43B84D61CFDD302004537DD /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				C43B850F1CFF1EBF004537DD /* Synchronous.swift */,
-				C43B84D71CFDD302004537DD /* Chain.swift */,
 				C43B84D81CFDD302004537DD /* Dispatch.swift */,
+				C4A93F981D086D98008F0AE2 /* Helpers.swift */,
 				C43B84C31CFDD23E004537DD /* Dispatch.h */,
 				C43B84D91CFDD302004537DD /* Info-iOS.plist */,
 				C43B84DA1CFDD302004537DD /* Info-OSX.plist */,
@@ -318,9 +314,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C43B85101CFF1EBF004537DD /* Synchronous.swift in Sources */,
-				C43B84DE1CFDD3F3004537DD /* Chain.swift in Sources */,
 				C43B84DF1CFDD3F3004537DD /* Dispatch.swift in Sources */,
+				C4A93F991D086D98008F0AE2 /* Helpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,9 +323,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C43B85111CFF1EBF004537DD /* Synchronous.swift in Sources */,
-				C43B84DC1CFDD3F3004537DD /* Chain.swift in Sources */,
 				C43B84DD1CFDD3F3004537DD /* Dispatch.swift in Sources */,
+				C4A93F9A1D086D98008F0AE2 /* Helpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -829,6 +823,7 @@
 				C43B84F41CFDD6FA004537DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C43B85021CFDD70D004537DD /* Build configuration list for PBXNativeTarget "Dispatch-OSX-Tests" */ = {
 			isa = XCConfigurationList;
@@ -837,6 +832,7 @@
 				C43B85041CFDD70D004537DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
