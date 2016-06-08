@@ -169,6 +169,12 @@ let globalBackgroundQueue = Queue.globalBackground
 - [X] Unit Tests
 - [ ] More examples
 
+## Communication
+
+- If you **find a bug**, open an issue.
+- If you **have a feature request**, open an issue.
+- If you **want to contribute**, submit a pull request.
+
 ## Authors
 
 - João Mourato, joao.armourato@gmail.com
