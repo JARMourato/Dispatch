@@ -45,7 +45,7 @@ $ brew install carthage
 To integrate Dispatch into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "DynamicThreads/Dispatch"
+github "Swiftification/Dispatch"
 ```
 
 Run `carthage update` to fetch the Dispatch library and drag into your Xcode project.
