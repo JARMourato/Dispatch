@@ -1,3 +1,4 @@
+<img src="https://raw.githubusercontent.com/Swiftification/Dispatch/master/icon.png" alt="Dispatch" width=140/>
 ## Build Status
 
 |**Branch**| **Status** |
