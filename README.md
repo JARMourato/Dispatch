@@ -2,8 +2,8 @@
 
 |**Branch**| **Status** |
 |---|---|
-|**master** |[![Bunch Status](https://travis-ci.org/DynamicThreads/Dispatch.svg?branch=master)](https://travis-ci.org/DynamicThreads/Dispatch)|
-|**develop** |[![Bunch Status](https://travis-ci.org/DynamicThreads/Dispatch.svg?branch=develop)](https://travis-ci.org/DynamicThreads/Dispatch)|
+|**master** |[![Bunch Status](https://travis-ci.org/Swiftification/Dispatch.svg?branch=master)](https://travis-ci.org/Swiftification/Dispatch)|
+|**develop** |[![Bunch Status](https://travis-ci.org/Swiftification/Dispatch.svg?branch=develop)](https://travis-ci.org/Swiftification/Dispatch)|
 
 ## Dispatch
 
