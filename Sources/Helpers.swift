@@ -26,51 +26,51 @@ import Foundation
 
 public extension Dispatch {
   
-  static func async(closure: DispatchClosure) -> Dispatch {
+  static func async(_ closure: DispatchClosure) -> Dispatch {
     return async(Queue.main, closure: closure)
   }
   
-  public func async(closure: DispatchClosure) -> Dispatch {
+  public func async(_ closure: DispatchClosure) -> Dispatch {
     return async(Queue.main, closure: closure)
   }
   
-  static func asyncBackground(closure: DispatchClosure) -> Dispatch {
+  static func asyncBackground(_ closure: DispatchClosure) -> Dispatch {
     return async(Queue.globalBackground, closure: closure)
   }
   
-  func asyncBackground(closure: DispatchClosure) -> Dispatch {
+  func asyncBackground(_ closure: DispatchClosure) -> Dispatch {
     return async(Queue.globalBackground, closure: closure)
   }
   
-  static func asyncUtility(closure: DispatchClosure) -> Dispatch {
+  static func asyncUtility(_ closure: DispatchClosure) -> Dispatch {
     return async(Queue.globalUtility, closure: closure)
   }
   
-  func asyncUtility(closure: DispatchClosure) -> Dispatch {
+  func asyncUtility(_ closure: DispatchClosure) -> Dispatch {
     return async(Queue.globalUtility, closure: closure)
   }
   
-  static func asyncUserInitiated(closure: DispatchClosure) -> Dispatch {
+  static func asyncUserInitiated(_ closure: DispatchClosure) -> Dispatch {
     return async(Queue.globalUserInitiated, closure: closure)
   }
   
-  func asyncUserInitiated(closure: DispatchClosure) -> Dispatch {
+  func asyncUserInitiated(_ closure: DispatchClosure) -> Dispatch {
     return async(Queue.globalUserInitiated, closure: closure)
   }
   
-  static func asyncUserInteractive(closure: DispatchClosure) -> Dispatch {
+  static func asyncUserInteractive(_ closure: DispatchClosure) -> Dispatch {
     return async(Queue.globalUserInteractive, closure: closure)
   }
   
-  func asyncUserInteractive(closure: DispatchClosure) -> Dispatch {
+  func asyncUserInteractive(_ closure: DispatchClosure) -> Dispatch {
     return async(Queue.globalUserInteractive, closure: closure)
   }
   
 }
 
 public extension Queue {
-  public static var globalUserInteractive : dispatch_queue_t { return global(Queue.Priority.userInteractive) }
-  public static var globalUserInitiated : dispatch_queue_t { return global(Queue.Priority.userInitiated) }
-  public static var globalUtility : dispatch_queue_t { return global(Queue.Priority.utility) }
-  public static var globalBackground : dispatch_queue_t { return global(Queue.Priority.background) }
+  public static var globalUserInteractive : DispatchQueue { return global(Queue.Priority.userInteractive) }
+  public static var globalUserInitiated : DispatchQueue { return global(Queue.Priority.userInitiated) }
+  public static var globalUtility : DispatchQueue { return global(Queue.Priority.utility) }
+  public static var globalBackground : DispatchQueue { return global(Queue.Priority.background) }
 }

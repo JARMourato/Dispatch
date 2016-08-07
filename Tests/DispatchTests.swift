@@ -26,7 +26,7 @@ import XCTest
 
 @testable import DispatchFramework
 
-class Dispatch_Tests: XCTestCase {
+class DispatchTests: XCTestCase {
   
   override func setUp() {
     super.setUp()
@@ -37,18 +37,18 @@ class Dispatch_Tests: XCTestCase {
   }
   
   func testBasicAsync() {
-    let expectation = expectationWithDescription("Wait for Dispatch Async")
+    let expectation = self.expectation(description: "Wait for Dispatch Async")
     let delay = 1.0
     
     Dispatch.after(delay) {
       expectation.fulfill()
     }
-    waitForExpectationsWithTimeout(delay, handler: nil)
+    waitForExpectations(timeout: delay, handler: nil)
   }
   
   func testBasicChain() {
-    let expectationAfter = expectationWithDescription("Wait for Dispatch Chain Async After")
-    let expectationAsync = expectationWithDescription("Wait for Dispatch Chain Async Main")
+    let expectationAfter = expectation(description: "Wait for Dispatch Chain Async After")
+    let expectationAsync = expectation(description: "Wait for Dispatch Chain Async Main")
     let delay = 1.0
     var operation : Int = 1
     var hasPassedByAsync = false
@@ -66,7 +66,7 @@ class Dispatch_Tests: XCTestCase {
       XCTAssertEqual(operation, 2, "This should be the second block to be executed")
       expectationAsync.fulfill()
     }
-    waitForExpectationsWithTimeout(delay + 1, handler: nil)
+    waitForExpectations(timeout: delay + 1, handler: nil)
   }
   
 }
