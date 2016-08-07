@@ -13,8 +13,8 @@
 		C43B84DF1CFDD3F3004537DD /* Dispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B84D81CFDD302004537DD /* Dispatch.swift */; };
 		C43B84F01CFDD6FA004537DD /* DispatchFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43B84C01CFDD23D004537DD /* DispatchFramework.framework */; };
 		C43B84FF1CFDD70D004537DD /* DispatchFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43B84CE1CFDD2AA004537DD /* DispatchFramework.framework */; };
-		C43B85091CFDD7A8004537DD /* Dispatch-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B85061CFDD7A4004537DD /* Dispatch-Tests.swift */; };
-		C43B850A1CFDD7A8004537DD /* Dispatch-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B85061CFDD7A4004537DD /* Dispatch-Tests.swift */; };
+		C43B85091CFDD7A8004537DD /* DispatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B85061CFDD7A4004537DD /* DispatchTests.swift */; };
+		C43B850A1CFDD7A8004537DD /* DispatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B85061CFDD7A4004537DD /* DispatchTests.swift */; };
 		C4A93F991D086D98008F0AE2 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A93F981D086D98008F0AE2 /* Helpers.swift */; };
 		C4A93F9A1D086D98008F0AE2 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A93F981D086D98008F0AE2 /* Helpers.swift */; };
 /* End PBXBuildFile section */
@@ -48,7 +48,7 @@
 		C43B84E31CFDD59B004537DD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C43B84EB1CFDD6FA004537DD /* Dispatch-iOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Dispatch-iOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C43B84FA1CFDD70D004537DD /* Dispatch-OSX-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Dispatch-OSX-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C43B85061CFDD7A4004537DD /* Dispatch-Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dispatch-Tests.swift"; sourceTree = "<group>"; };
+		C43B85061CFDD7A4004537DD /* DispatchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchTests.swift; sourceTree = "<group>"; };
 		C43B85071CFDD7A4004537DD /* Info-iOS-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iOS-Tests.plist"; sourceTree = "<group>"; };
 		C43B85081CFDD7A4004537DD /* Info-OSX-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-OSX-Tests.plist"; sourceTree = "<group>"; };
 		C4A93F981D086D98008F0AE2 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
@@ -134,7 +134,7 @@
 		C43B85051CFDD7A4004537DD /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				C43B85061CFDD7A4004537DD /* Dispatch-Tests.swift */,
+				C43B85061CFDD7A4004537DD /* DispatchTests.swift */,
 				C43B85071CFDD7A4004537DD /* Info-iOS-Tests.plist */,
 				C43B85081CFDD7A4004537DD /* Info-OSX-Tests.plist */,
 			);
@@ -243,6 +243,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = Swiftification;
 				TargetAttributes = {
 					C43B84BF1CFDD23D004537DD = {
 						CreatedOnToolsVersion = 7.3;
@@ -332,7 +333,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C43B85091CFDD7A8004537DD /* Dispatch-Tests.swift in Sources */,
+				C43B85091CFDD7A8004537DD /* DispatchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,7 +341,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C43B850A1CFDD7A8004537DD /* Dispatch-Tests.swift in Sources */,
+				C43B850A1CFDD7A8004537DD /* DispatchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
