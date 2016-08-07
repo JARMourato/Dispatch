@@ -1,7 +1,7 @@
 /*
  The MIT License (MIT)
  
- Copyright (c) 2016 DynamicThreads
+ Copyright (c) 2016 Swiftification
  
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -216,7 +216,8 @@ extension Dispatch {
 //MARK: Non-Chainable Methods
 
 extension Dispatch {
-  
+
+  @available(*, deprecated = 1.0.0, message = "dispatch_once is not available on Swift 3.0, use lazily initialized globals or static properties to get the same thread-safety.")
   static func once(inout token: dispatch_once_t, closure: DispatchClosure) {
     dispatch_once(&token, closure)
   }
