@@ -5,9 +5,8 @@ opt_in_rules:
   - missing_docs
 included:
 excluded:
-  - docs
-  - PresentrExample
-  - PresentrTests
+  - Carthage
+  - Demo
 force_cast: warning
 force_try:
   severity: warning
