@@ -148,7 +148,7 @@ public struct Dispatch {
 
 //MARK: - Chainable methods
 
-extension Dispatch {
+public extension Dispatch {
 
     //MARK: - Static methods
 
@@ -215,7 +215,7 @@ extension Dispatch {
 
 //MARK: - Non-Chainable Methods
 
-extension Dispatch {
+public extension Dispatch {
 
     static func once(inout token: dispatch_once_t, closure: DispatchClosure) {
         dispatch_once(&token, closure)
@@ -248,7 +248,7 @@ extension Dispatch {
 
 //MARK: - Block methods
 
-extension Dispatch {
+public extension Dispatch {
     public func cancel() {
         dispatch_block_cancel(currentDispatchBlock)
     }
