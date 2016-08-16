@@ -1,18 +1,18 @@
 /*
  The MIT License (MIT)
- 
+
  Copyright (c) 2016 Swiftification
- 
+
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  copies of the Software, and to permit persons to whom the Software is
  furnished to do so, subject to the following conditions:
- 
+
  The above copyright notice and this permission notice shall be included in all
  copies or substantial portions of the Software.
- 
+
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -27,34 +27,34 @@ import XCTest
 @testable import DispatchFramework
 
 class DispatchTests: XCTestCase {
-  
+
   override func setUp() {
     super.setUp()
   }
-  
+
   override func tearDown() {
     super.tearDown()
   }
-  
+
   func testBasicAsync() {
     let expectation = self.expectation(description: "Wait for Dispatch Async")
     let delay = 1.0
-    
+
     Dispatch.after(delay) {
       expectation.fulfill()
     }
     waitForExpectations(timeout: delay, handler: nil)
   }
-  
+
   func testBasicChain() {
     let expectationAfter = expectation(description: "Wait for Dispatch Chain Async After")
     let expectationAsync = expectation(description: "Wait for Dispatch Chain Async Main")
     let delay = 1.0
-    var operation : Int = 1
+    var operation: Int = 1
     var hasPassedByAsync = false
-    
+
     Dispatch.after(delay) {
-      if (hasPassedByAsync) {
+      if hasPassedByAsync {
         XCTFail("This should be the first block to be executed")
         return
       }
@@ -68,5 +68,5 @@ class DispatchTests: XCTestCase {
     }
     waitForExpectations(timeout: delay + 1, handler: nil)
   }
-  
+
 }
