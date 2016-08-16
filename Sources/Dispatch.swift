@@ -33,12 +33,12 @@ fileprivate var dispatchTimeCalc: (TimeInterval) -> (DispatchTime) = { DispatchT
 //MARK: - Queue
 
 public enum Queue {
-  enum Atribute {
+  public enum Atribute {
     static var concurrent: DispatchQueue.Attributes = DispatchQueue.Attributes.concurrent
     static var serial: DispatchQueue.Attributes = []
   }
 
-  enum Priority {
+  public enum Priority {
     static var userInteractive: DispatchQoS.QoSClass = DispatchQoS.QoSClass.userInteractive
     static var userInitiated: DispatchQoS.QoSClass = DispatchQoS.QoSClass.userInitiated
     static var utility: DispatchQoS.QoSClass = DispatchQoS.QoSClass.utility
@@ -65,43 +65,43 @@ public struct Group {
   public let group: DispatchGroup = DispatchGroup()
   private var onceToken: Int32 = 0
 
-  func enter() {
+  public func enter() {
     group.enter()
   }
 
-  func leave() {
+  public func leave() {
     group.leave()
   }
 
-  mutating func enterOnce() {
+  public mutating func enterOnce() {
     enter()
     onceToken = 1
   }
 
-  mutating func leaveOnce() -> Bool {
+  public mutating func leaveOnce() -> Bool {
     guard OSAtomicCompareAndSwapInt(1, 0, &onceToken) else { return false }
     leave()
     return true
   }
 
-  func async(_ queue: DispatchQueue, closure: DispatchClosure) -> Group {
+  public func async(_ queue: DispatchQueue, closure: DispatchClosure) -> Group {
     queue.async(group: group) {
       autoreleasepool(invoking: closure)
     }
     return self
   }
 
-  func notify(_ queue: DispatchQueue, closure: DispatchClosure) {
+  public func notify(_ queue: DispatchQueue, closure: DispatchClosure) {
     group.notify(queue: queue) {
       autoreleasepool(invoking: closure)
     }
   }
 
-  func wait() -> DispatchTimeoutResult {
+  public func wait() -> DispatchTimeoutResult {
     return group.wait(timeout: DispatchTime.distantFuture)
   }
 
-  func wait(_ timeout: TimeInterval) -> DispatchTimeoutResult {
+  public func wait(_ timeout: TimeInterval) -> DispatchTimeoutResult {
     return group.wait(timeout: dispatchTimeCalc(timeout))
   }
 
@@ -122,15 +122,15 @@ public struct Semaphore {
     self.init(value: 0)
   }
 
-  func signal() -> Int {
+  public func signal() -> Int {
     return semaphore.signal()
   }
 
-  func wait() -> DispatchTimeoutResult {
+  public func wait() -> DispatchTimeoutResult {
     return semaphore.wait(timeout: DispatchTime.distantFuture)
   }
 
-  func wait(_ timeout: TimeInterval) -> DispatchTimeoutResult {
+  public func wait(_ timeout: TimeInterval) -> DispatchTimeoutResult {
     return semaphore.wait(timeout: dispatchTimeCalc(timeout))
   }
 
@@ -247,15 +247,15 @@ public extension Dispatch {
 //MARK: Block methods
 
 public extension Dispatch {
-  func cancel() {
+  public func cancel() {
     currentItem.cancel()
   }
 
-  func wait() -> DispatchTimeoutResult {
+  public func wait() -> DispatchTimeoutResult {
     return currentItem.wait(timeout: DispatchTime.distantFuture)
   }
 
-  func wait(_ timeout: TimeInterval) -> DispatchTimeoutResult {
+  public func wait(_ timeout: TimeInterval) -> DispatchTimeoutResult {
     return currentItem.wait(timeout: dispatchTimeCalc(timeout))
   }
 }
