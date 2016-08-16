@@ -112,12 +112,12 @@ public struct Semaphore {
   private let value: Int
   let semaphore: dispatch_semaphore_t
 
-  public init(value: Int) {
+  init(value: Int) {
     self.value = value
     semaphore = dispatch_semaphore_create(value)
   }
 
-  public init() {
+  init() {
     self.init(value: 0)
   }
 
@@ -250,7 +250,7 @@ public extension Dispatch {
 
 //MARK: Block methods
 
-extension Dispatch {
+public extension Dispatch {
   public func cancel() {
     dispatch_block_cancel(currentDispatchBlock)
   }
