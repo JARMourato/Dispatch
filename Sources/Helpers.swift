@@ -68,8 +68,8 @@ public extension Dispatch {
 }
 
 public extension Queue {
-    public static var globalUserInteractive: dispatch_queue_t { return global(Queue.Priority.userInteractive) }
-    public static var globalUserInitiated: dispatch_queue_t { return global(Queue.Priority.userInitiated) }
-    public static var globalUtility: dispatch_queue_t { return global(Queue.Priority.utility) }
-    public static var globalBackground: dispatch_queue_t { return global(Queue.Priority.background) }
+    static var globalUserInteractive: dispatch_queue_t { return global(Queue.Priority.userInteractive) }
+    static var globalUserInitiated: dispatch_queue_t { return global(Queue.Priority.userInitiated) }
+    static var globalUtility: dispatch_queue_t { return global(Queue.Priority.utility) }
+    static var globalBackground: dispatch_queue_t { return global(Queue.Priority.background) }
 }
