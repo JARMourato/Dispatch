@@ -13,8 +13,8 @@
 		C43B84DF1CFDD3F3004537DD /* Dispatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B84D81CFDD302004537DD /* Dispatch.swift */; };
 		C43B84F01CFDD6FA004537DD /* DispatchFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43B84C01CFDD23D004537DD /* DispatchFramework.framework */; };
 		C43B84FF1CFDD70D004537DD /* DispatchFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43B84CE1CFDD2AA004537DD /* DispatchFramework.framework */; };
-		C43B85091CFDD7A8004537DD /* Dispatch-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B85061CFDD7A4004537DD /* Dispatch-Tests.swift */; };
-		C43B850A1CFDD7A8004537DD /* Dispatch-Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B85061CFDD7A4004537DD /* Dispatch-Tests.swift */; };
+		C43B85091CFDD7A8004537DD /* DispatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B85061CFDD7A4004537DD /* DispatchTests.swift */; };
+		C43B850A1CFDD7A8004537DD /* DispatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43B85061CFDD7A4004537DD /* DispatchTests.swift */; };
 		C4A93F991D086D98008F0AE2 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A93F981D086D98008F0AE2 /* Helpers.swift */; };
 		C4A93F9A1D086D98008F0AE2 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A93F981D086D98008F0AE2 /* Helpers.swift */; };
 /* End PBXBuildFile section */
@@ -48,7 +48,7 @@
 		C43B84E31CFDD59B004537DD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C43B84EB1CFDD6FA004537DD /* Dispatch-iOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Dispatch-iOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C43B84FA1CFDD70D004537DD /* Dispatch-OSX-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Dispatch-OSX-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C43B85061CFDD7A4004537DD /* Dispatch-Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dispatch-Tests.swift"; sourceTree = "<group>"; };
+		C43B85061CFDD7A4004537DD /* DispatchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchTests.swift; sourceTree = "<group>"; };
 		C43B85071CFDD7A4004537DD /* Info-iOS-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-iOS-Tests.plist"; sourceTree = "<group>"; };
 		C43B85081CFDD7A4004537DD /* Info-OSX-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-OSX-Tests.plist"; sourceTree = "<group>"; };
 		C4A93F981D086D98008F0AE2 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
@@ -134,7 +134,7 @@
 		C43B85051CFDD7A4004537DD /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				C43B85061CFDD7A4004537DD /* Dispatch-Tests.swift */,
+				C43B85061CFDD7A4004537DD /* DispatchTests.swift */,
 				C43B85071CFDD7A4004537DD /* Info-iOS-Tests.plist */,
 				C43B85081CFDD7A4004537DD /* Info-OSX-Tests.plist */,
 			);
@@ -171,7 +171,7 @@
 				C43B84BC1CFDD23D004537DD /* Frameworks */,
 				C43B84BD1CFDD23D004537DD /* Headers */,
 				C43B84BE1CFDD23D004537DD /* Resources */,
-				810477A01D63C9E9007D4D01 /* ShellScript */,
+				81E254581D63CF11003B246C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -190,7 +190,7 @@
 				C43B84CA1CFDD2AA004537DD /* Frameworks */,
 				C43B84CB1CFDD2AA004537DD /* Headers */,
 				C43B84CC1CFDD2AA004537DD /* Resources */,
-				810477A11D63C9F3007D4D01 /* ShellScript */,
+				81E254591D63CF43003B246C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -252,7 +252,6 @@
 					};
 					C43B84CD1CFDD2AA004537DD = {
 						CreatedOnToolsVersion = 7.3;
-						LastSwiftMigration = 0800;
 					};
 					C43B84EA1CFDD6FA004537DD = {
 						CreatedOnToolsVersion = 7.3;
@@ -260,7 +259,6 @@
 					};
 					C43B84F91CFDD70D004537DD = {
 						CreatedOnToolsVersion = 7.3;
-						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -316,7 +314,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		810477A01D63C9E9007D4D01 /* ShellScript */ = {
+		81E254581D63CF11003B246C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -329,7 +327,7 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		810477A11D63C9F3007D4D01 /* ShellScript */ = {
+		81E254591D63CF43003B246C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -367,7 +365,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C43B85091CFDD7A8004537DD /* Dispatch-Tests.swift in Sources */,
+				C43B85091CFDD7A8004537DD /* DispatchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,7 +373,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C43B850A1CFDD7A8004537DD /* Dispatch-Tests.swift in Sources */,
+				C43B850A1CFDD7A8004537DD /* DispatchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,7 +495,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -551,7 +549,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -615,7 +613,6 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -670,7 +667,6 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -722,7 +718,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -765,7 +761,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -817,7 +813,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -861,7 +856,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
