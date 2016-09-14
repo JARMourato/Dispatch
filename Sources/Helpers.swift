@@ -26,43 +26,43 @@ import Foundation
 
 public extension Dispatch {
 
-  static func async(_ closure: DispatchClosure) -> Dispatch {
+  static func async(_ closure: @escaping DispatchClosure) -> Dispatch {
     return async(Queue.main, closure: closure)
   }
 
-  func async(_ closure: DispatchClosure) -> Dispatch {
+  func async(_ closure: @escaping DispatchClosure) -> Dispatch {
     return async(Queue.main, closure: closure)
   }
 
-  static func asyncBackground(_ closure: DispatchClosure) -> Dispatch {
+  static func asyncBackground(_ closure: @escaping DispatchClosure) -> Dispatch {
     return async(Queue.globalBackground, closure: closure)
   }
 
-  func asyncBackground(_ closure: DispatchClosure) -> Dispatch {
+  func asyncBackground(_ closure: @escaping DispatchClosure) -> Dispatch {
     return async(Queue.globalBackground, closure: closure)
   }
 
-  static func asyncUtility(_ closure: DispatchClosure) -> Dispatch {
+  static func asyncUtility(_ closure: @escaping DispatchClosure) -> Dispatch {
     return async(Queue.globalUtility, closure: closure)
   }
 
-  func asyncUtility(_ closure: DispatchClosure) -> Dispatch {
+  func asyncUtility(_ closure: @escaping DispatchClosure) -> Dispatch {
     return async(Queue.globalUtility, closure: closure)
   }
 
-  static func asyncUserInitiated(_ closure: DispatchClosure) -> Dispatch {
+  static func asyncUserInitiated(_ closure: @escaping DispatchClosure) -> Dispatch {
     return async(Queue.globalUserInitiated, closure: closure)
   }
 
-  func asyncUserInitiated(_ closure: DispatchClosure) -> Dispatch {
+  func asyncUserInitiated(_ closure: @escaping DispatchClosure) -> Dispatch {
     return async(Queue.globalUserInitiated, closure: closure)
   }
 
-  static func asyncUserInteractive(_ closure: DispatchClosure) -> Dispatch {
+  static func asyncUserInteractive(_ closure: @escaping DispatchClosure) -> Dispatch {
     return async(Queue.globalUserInteractive, closure: closure)
   }
 
-  func asyncUserInteractive(_ closure: DispatchClosure) -> Dispatch {
+  func asyncUserInteractive(_ closure: @escaping DispatchClosure) -> Dispatch {
     return async(Queue.globalUserInteractive, closure: closure)
   }
 

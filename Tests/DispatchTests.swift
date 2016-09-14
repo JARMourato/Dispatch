@@ -37,11 +37,11 @@ class DispatchTests: XCTestCase {
   }
 
   func testBasicAsync() {
-    let expectation = self.expectation(description: "Wait for Dispatch Async")
+    let expectationBasic = expectation(description: "Wait for Dispatch Async")
     let delay = 1.0
 
     Dispatch.after(delay) {
-      expectation.fulfill()
+      expectationBasic.fulfill()
     }
     waitForExpectations(timeout: delay, handler: nil)
   }

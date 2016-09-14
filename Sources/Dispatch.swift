@@ -27,7 +27,7 @@ import Foundation
 public typealias DispatchClosure = (Void) -> (Void)
 public typealias DispatchApplyClosure = (Int) -> (Void)
 
-fileprivate func getTimeout(_ time: TimeInterval) -> Int64 { return Int64(time * Double(NSEC_PER_SEC)) }
+fileprivate var getTimeout: (_ time: TimeInterval) -> Int64 = { Int64($0 * Double(NSEC_PER_SEC)) }
 fileprivate var dispatchTimeCalc: (TimeInterval) -> (DispatchTime) = { DispatchTime.now() + Double(getTimeout($0)) / Double(NSEC_PER_SEC) }
 
 //MARK: - Queue
@@ -84,14 +84,14 @@ public struct Group {
     return true
   }
 
-  public func async(_ queue: DispatchQueue, closure: DispatchClosure) -> Group {
+  public func async(_ queue: DispatchQueue, closure: @escaping DispatchClosure) -> Group {
     queue.async(group: group) {
       autoreleasepool(invoking: closure)
     }
     return self
   }
 
-  public func notify(_ queue: DispatchQueue, closure: DispatchClosure) {
+  public func notify(_ queue: DispatchQueue, closure: @escaping DispatchClosure) {
     group.notify(queue: queue) {
       autoreleasepool(invoking: closure)
     }
@@ -141,7 +141,7 @@ public struct Semaphore {
 
 public struct Dispatch {
   fileprivate let currentItem: DispatchWorkItem
-  fileprivate init(_ closure: DispatchClosure) {
+  fileprivate init(_ closure: @escaping DispatchClosure) {
     let item = DispatchWorkItem(flags: DispatchWorkItemFlags.inheritQoS, block: closure)
     currentItem = item
   }
@@ -153,23 +153,23 @@ public extension Dispatch {
 
   //MARK: Static methods
 
-  static func async(_ queue: DispatchQueue, closure: DispatchClosure) -> Dispatch {
+  static func async(_ queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
     let dispatch = Dispatch(closure)
     queue.async(execute: dispatch.currentItem)
     return dispatch
   }
 
-  static func sync(_ queue: DispatchQueue, closure: DispatchClosure) -> Dispatch {
+  static func sync(_ queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
     let dispatch = Dispatch(closure)
     queue.sync(execute: dispatch.currentItem)
     return dispatch
   }
 
-  static func after(_ time: TimeInterval, closure: DispatchClosure) -> Dispatch {
+  static func after(_ time: TimeInterval, closure: @escaping DispatchClosure) -> Dispatch {
      return after(time, queue: Queue.main, closure: closure)
   }
 
-  static func after(_ time: TimeInterval, queue: DispatchQueue, closure: DispatchClosure) -> Dispatch {
+  static func after(_ time: TimeInterval, queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
     let dispatch = Dispatch(closure)
     queue.asyncAfter(deadline: DispatchTime.now() + Double(getTimeout(time)) / Double(NSEC_PER_SEC), execute: dispatch.currentItem)
     return dispatch
@@ -177,19 +177,19 @@ public extension Dispatch {
 
   //MARK: Instance methods
 
-  func async(_ queue: DispatchQueue, closure: DispatchClosure) -> Dispatch {
+  func async(_ queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
     return chainClosure(queue: queue, closure: closure)
   }
 
-  func after(_ time: TimeInterval, closure: DispatchClosure) -> Dispatch {
+  func after(_ time: TimeInterval, closure: @escaping DispatchClosure) -> Dispatch {
     return after(time, queue: Queue.main, closure: closure)
   }
 
-  func after(_ time: TimeInterval, queue: DispatchQueue, closure: DispatchClosure) -> Dispatch {
+  func after(_ time: TimeInterval, queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
     return chainClosure(time, queue: queue, closure: closure)
   }
 
-  func sync(_ queue: DispatchQueue, closure: DispatchClosure) -> Dispatch {
+  func sync(_ queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
     let syncWrapper: DispatchClosure = {
       queue.sync(execute: closure)
     }
@@ -198,7 +198,7 @@ public extension Dispatch {
 
   //MARK: Private chaining helper method
 
-  private func chainClosure(_ time: TimeInterval? = nil, queue: DispatchQueue, closure: DispatchClosure) -> Dispatch {
+  private func chainClosure(_ time: TimeInterval? = nil, queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
     let newDispatch = Dispatch(closure)
     let nextItem: DispatchWorkItem
     if let time = time {
@@ -218,7 +218,7 @@ public extension Dispatch {
 
 public extension Dispatch {
 
-  static func barrierAsync(_ queue: DispatchQueue, closure: DispatchClosure) {
+  static func barrierAsync(_ queue: DispatchQueue, closure: @escaping DispatchClosure) {
     queue.async(flags: .barrier, execute: closure)
   }
 
