@@ -8,7 +8,7 @@
 
 ## Dispatch
 
-[![Swift 2.2](https://img.shields.io/badge/Swift-2.2-orange.svg?style=flat)](https://developer.apple.com/swift/)
+[![Swift 3.0](https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
 ![Platforms](https://img.shields.io/cocoapods/p/Dispatch.svg?style=flat)
 [![License](https://img.shields.io/cocoapods/l/Dispatch.svg)](https://github.com/DynamicThreads/Dispatch/master/LICENSE)
 
@@ -18,6 +18,10 @@
 
 [![codebeat badge](https://codebeat.co/badges/b1709704-b1b6-40fa-a38f-0962f72aa264)](https://codebeat.co/projects/github-com-dynamicthreads-dispatch)
 [![codecov](https://codecov.io/gh/DynamicThreads/Dispatch/branch/master/graph/badge.svg)](https://codecov.io/gh/DynamicThreads/Dispatch)
+
+#### Note: 
+
+Dispatch requires swift 3.0. Use version 1.0.0 for swift 2.3 or version 0.9.8 for swift 2.2.
 
 ## Installation
 
