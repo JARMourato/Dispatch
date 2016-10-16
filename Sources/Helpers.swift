@@ -25,52 +25,72 @@
 import Foundation
 
 public extension Dispatch {
+  
+  @discardableResult
+  public static func sync(_ closure: @escaping DispatchClosure) -> Dispatch {
+    return sync(Queue.main, closure: closure)
+  }
+  
+  @discardableResult
+  public func sync(_ closure: @escaping DispatchClosure) -> Dispatch {
+    return sync(Queue.main, closure: closure)
+  }
 
-  static func async(_ closure: @escaping DispatchClosure) -> Dispatch {
+  @discardableResult
+  public static func async(_ closure: @escaping DispatchClosure) -> Dispatch {
     return async(Queue.main, closure: closure)
   }
 
-  func async(_ closure: @escaping DispatchClosure) -> Dispatch {
+  @discardableResult
+  public func async(_ closure: @escaping DispatchClosure) -> Dispatch {
     return async(Queue.main, closure: closure)
   }
 
-  static func asyncBackground(_ closure: @escaping DispatchClosure) -> Dispatch {
+  @discardableResult
+  public static func asyncBackground(_ closure: @escaping DispatchClosure) -> Dispatch {
     return async(Queue.globalBackground, closure: closure)
   }
 
-  func asyncBackground(_ closure: @escaping DispatchClosure) -> Dispatch {
+  @discardableResult
+  public func asyncBackground(_ closure: @escaping DispatchClosure) -> Dispatch {
     return async(Queue.globalBackground, closure: closure)
   }
 
-  static func asyncUtility(_ closure: @escaping DispatchClosure) -> Dispatch {
+  @discardableResult
+  public static func asyncUtility(_ closure: @escaping DispatchClosure) -> Dispatch {
     return async(Queue.globalUtility, closure: closure)
   }
 
-  func asyncUtility(_ closure: @escaping DispatchClosure) -> Dispatch {
+  @discardableResult
+  public func asyncUtility(_ closure: @escaping DispatchClosure) -> Dispatch {
     return async(Queue.globalUtility, closure: closure)
   }
 
-  static func asyncUserInitiated(_ closure: @escaping DispatchClosure) -> Dispatch {
+  @discardableResult
+  public static func asyncUserInitiated(_ closure: @escaping DispatchClosure) -> Dispatch {
     return async(Queue.globalUserInitiated, closure: closure)
   }
 
-  func asyncUserInitiated(_ closure: @escaping DispatchClosure) -> Dispatch {
+  @discardableResult
+  public func asyncUserInitiated(_ closure: @escaping DispatchClosure) -> Dispatch {
     return async(Queue.globalUserInitiated, closure: closure)
   }
 
-  static func asyncUserInteractive(_ closure: @escaping DispatchClosure) -> Dispatch {
+  @discardableResult
+  public static func asyncUserInteractive(_ closure: @escaping DispatchClosure) -> Dispatch {
     return async(Queue.globalUserInteractive, closure: closure)
   }
 
-  func asyncUserInteractive(_ closure: @escaping DispatchClosure) -> Dispatch {
+  @discardableResult
+  public func asyncUserInteractive(_ closure: @escaping DispatchClosure) -> Dispatch {
     return async(Queue.globalUserInteractive, closure: closure)
   }
 
 }
 
 public extension Queue {
-  static var globalUserInteractive: DispatchQueue { return global(Queue.Priority.userInteractive) }
-  static var globalUserInitiated: DispatchQueue { return global(Queue.Priority.userInitiated) }
-  static var globalUtility: DispatchQueue { return global(Queue.Priority.utility) }
-  static var globalBackground: DispatchQueue { return global(Queue.Priority.background) }
+  public static var globalUserInteractive: DispatchQueue { return global(Queue.Priority.userInteractive) }
+  public static var globalUserInitiated: DispatchQueue { return global(Queue.Priority.userInitiated) }
+  public static var globalUtility: DispatchQueue { return global(Queue.Priority.utility) }
+  public static var globalBackground: DispatchQueue { return global(Queue.Priority.background) }
 }

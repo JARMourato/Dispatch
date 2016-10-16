@@ -45,15 +45,15 @@ public enum Queue {
     static var background: DispatchQoS.QoSClass = DispatchQoS.QoSClass.background
   }
 
-  static var main: DispatchQueue {
+  public static var main: DispatchQueue {
     return DispatchQueue.main
   }
 
-  static var global: (DispatchQoS.QoSClass) -> DispatchQueue = { priority in
+  public static var global: (DispatchQoS.QoSClass) -> DispatchQueue = { priority in
     return DispatchQueue.global(qos: priority)
   }
 
-  static var custom: (String, DispatchQueue.Attributes) -> DispatchQueue = { identifier, attributes in
+  public static var custom: (String, DispatchQueue.Attributes) -> DispatchQueue = { identifier, attributes in
     return DispatchQueue(label: identifier, attributes: attributes)
   }
 
@@ -78,12 +78,14 @@ public struct Group {
     onceToken = 1
   }
 
+  @discardableResult
   public mutating func leaveOnce() -> Bool {
     guard OSAtomicCompareAndSwapInt(1, 0, &onceToken) else { return false }
     leave()
     return true
   }
 
+  @discardableResult
   public func async(_ queue: DispatchQueue, closure: @escaping DispatchClosure) -> Group {
     queue.async(group: group) {
       autoreleasepool(invoking: closure)
@@ -97,10 +99,12 @@ public struct Group {
     }
   }
 
+  @discardableResult
   public func wait() -> DispatchTimeoutResult {
     return group.wait(timeout: DispatchTime.distantFuture)
   }
 
+  @discardableResult
   public func wait(_ timeout: TimeInterval) -> DispatchTimeoutResult {
     return group.wait(timeout: dispatchTimeCalc(timeout))
   }
@@ -121,15 +125,18 @@ public struct Semaphore {
   init() {
     self.init(value: 0)
   }
-
+  
+  @discardableResult
   public func signal() -> Int {
     return semaphore.signal()
   }
 
+  @discardableResult
   public func wait() -> DispatchTimeoutResult {
     return semaphore.wait(timeout: DispatchTime.distantFuture)
   }
 
+  @discardableResult
   public func wait(_ timeout: TimeInterval) -> DispatchTimeoutResult {
     return semaphore.wait(timeout: dispatchTimeCalc(timeout))
   }
@@ -153,23 +160,27 @@ public extension Dispatch {
 
   //MARK: Static methods
 
-  static func async(_ queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
+  @discardableResult
+  public static func async(_ queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
     let dispatch = Dispatch(closure)
     queue.async(execute: dispatch.currentItem)
     return dispatch
   }
 
-  static func sync(_ queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
+  @discardableResult
+  public static func sync(_ queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
     let dispatch = Dispatch(closure)
     queue.sync(execute: dispatch.currentItem)
     return dispatch
   }
 
-  static func after(_ time: TimeInterval, closure: @escaping DispatchClosure) -> Dispatch {
+  @discardableResult
+  public static func after(_ time: TimeInterval, closure: @escaping DispatchClosure) -> Dispatch {
      return after(time, queue: Queue.main, closure: closure)
   }
 
-  static func after(_ time: TimeInterval, queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
+  @discardableResult
+  public static func after(_ time: TimeInterval, queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
     let dispatch = Dispatch(closure)
     queue.asyncAfter(deadline: DispatchTime.now() + Double(getTimeout(time)) / Double(NSEC_PER_SEC), execute: dispatch.currentItem)
     return dispatch
@@ -177,19 +188,23 @@ public extension Dispatch {
 
   //MARK: Instance methods
 
-  func async(_ queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
+  @discardableResult
+  public func async(_ queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
     return chainClosure(queue: queue, closure: closure)
   }
 
-  func after(_ time: TimeInterval, closure: @escaping DispatchClosure) -> Dispatch {
+  @discardableResult
+  public func after(_ time: TimeInterval, closure: @escaping DispatchClosure) -> Dispatch {
     return after(time, queue: Queue.main, closure: closure)
   }
 
-  func after(_ time: TimeInterval, queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
+  @discardableResult
+  public func after(_ time: TimeInterval, queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
     return chainClosure(time, queue: queue, closure: closure)
   }
 
-  func sync(_ queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
+  @discardableResult
+  public func sync(_ queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
     let syncWrapper: DispatchClosure = {
       queue.sync(execute: closure)
     }
@@ -197,7 +212,7 @@ public extension Dispatch {
   }
 
   //MARK: Private chaining helper method
-
+  
   private func chainClosure(_ time: TimeInterval? = nil, queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
     let newDispatch = Dispatch(closure)
     let nextItem: DispatchWorkItem
@@ -218,27 +233,27 @@ public extension Dispatch {
 
 public extension Dispatch {
 
-  static func barrierAsync(_ queue: DispatchQueue, closure: @escaping DispatchClosure) {
+  public static func barrierAsync(_ queue: DispatchQueue, closure: @escaping DispatchClosure) {
     queue.async(flags: .barrier, execute: closure)
   }
 
-  static func barrierSync(_ queue: DispatchQueue, closure: DispatchClosure) {
+  public static func barrierSync(_ queue: DispatchQueue, closure: DispatchClosure) {
     queue.sync(flags: .barrier, execute: closure)
   }
 
-  static func apply(_ iterations: Int, queue: DispatchQueue, closure: DispatchApplyClosure) {
+  public static func apply(_ iterations: Int, queue: DispatchQueue, closure: DispatchApplyClosure) {
     DispatchQueue.concurrentPerform(iterations: iterations, execute: closure)
   }
 
-  static func time(_ timeout: TimeInterval) -> DispatchTime {
+  public static func time(_ timeout: TimeInterval) -> DispatchTime {
     return dispatchTimeCalc(timeout)
   }
 
-  static var group: Group {
+  public static var group: Group {
     return Group()
   }
 
-  static func semaphore(_ value: Int = 0) -> Semaphore {
+  public static func semaphore(_ value: Int = 0) -> Semaphore {
     return Semaphore(value: value)
   }
 
@@ -251,10 +266,12 @@ public extension Dispatch {
     currentItem.cancel()
   }
 
+  @discardableResult
   public func wait() -> DispatchTimeoutResult {
     return currentItem.wait(timeout: DispatchTime.distantFuture)
   }
 
+  @discardableResult
   public func wait(_ timeout: TimeInterval) -> DispatchTimeoutResult {
     return currentItem.wait(timeout: dispatchTimeCalc(timeout))
   }

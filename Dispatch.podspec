@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "Dispatch"
-  s.version          = "2.0.0"
+  s.version          = "2.0.1"
   s.summary          = "Just a tiny library to make using GCD easier and intuitive"
   s.homepage         = "https://github.com/Swiftification/Dispatch"
   s.license          = 'MIT'
