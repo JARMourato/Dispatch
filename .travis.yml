@@ -1,22 +1,49 @@
+branches:
+  only:
+    - master
 language: objective-c
-osx_image: xcode8.0
-xcode_sdk: iphonesimulator
-
+osx_image: xcode8
 cache:
-  bundler: true
-
+  - cocoapods
+env:
+  matrix:
+    - TEST_TYPE=iOS
+    - TEST_TYPE=macOS
+    - TEST_TYPE=Lint
+    - TEST_TYPE=Distribution
 before_install:
-  - brew update
-  # - brew outdated xctool || brew upgrade xctool
-  - sudo gem install xcpretty
-
-script: 
-  # - xctool -project Dispatch.xcodeproj -scheme Dispatch-iOS -reporter pretty build-tests CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
-  # - xctool -project Dispatch.xcodeproj -scheme Dispatch-OSX -reporter pretty build-tests CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
-  # - xctool -project Dispatch.xcodeproj -scheme Dispatch-iOS -reporter pretty -sdk iphonesimulator run-tests ONLY_ACTIVE_ARCH=NO CODE_SIGNING_REQUIRED=NO
-
-  - xcodebuild -project Dispatch.xcodeproj -scheme Dispatch-iOS -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6,OS=8.1' build
-  - xcodebuild -project Dispatch.xcodeproj -scheme Dispatch-iOS -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6,OS=8.1' test | xcpretty --test --color
-
+- |
+  if [ "$TEST_TYPE" = Lint ] || [ "$TEST_TYPE" = Distribution ]; then
+    brew update
+  fi
+install:
+- |
+  if [ "$TEST_TYPE" = iOS ] || [ "$TEST_TYPE" = macOS ]; then
+    gem install xcpretty -N --no-ri --no-rdoc
+  elif [ "$TEST_TYPE" = Lint ]; then
+    brew install swiftlint || brew upgrade swiftlint
+  elif [ "$TEST_TYPE" = Distribution ]; then
+    gem install cocoapods --pre --quiet --no-ri --no-rdoc
+    brew install carthage || brew upgrade carthage
+  fi 
+script:
+- |
+    if [ "$TEST_TYPE" = iOS ]; then
+      set -o pipefail
+      xcodebuild test -project Dispatch.xcodeproj -sdk iphonesimulator -scheme Dispatch-iOS -configuration Debug -destination "platform=iOS Simulator,name=iPhone 4s" -destination "platform=iOS Simulator,name=iPhone 6 Plus" GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
+      xcodebuild test -project Dispatch.xcodeproj -sdk iphonesimulator -scheme Dispatch-iOS -configuration Release -destination "platform=iOS Simulator,name=iPhone 4s" -destination "platform=iOS Simulator,name=iPhone 6 Plus" GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
+    elif [ "$TEST_TYPE" = macOS ]; then
+      set -o pipefail
+      xcodebuild test -project Dispatch.xcodeproj -sdk macosx -scheme Dispatch-OSX -configuration Debug GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
+      xcodebuild test -project Dispatch.xcodeproj -sdk macosx -scheme Dispatch-OSX -configuration Release GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES | xcpretty -c
+    elif [ "$TEST_TYPE" = Lint ]; then
+      swiftlint lint
+    elif [ "$TEST_TYPE" = Distribution ]; then
+      pod lib lint Dispatch.podspec
+      carthage build --no-skip-current
+    fi
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+- |
+    if [ "$TEST_TYPE" = iOS ] || [ "$TEST_TYPE" = macOS ] || [ "$TEST_TYPE" = tvOS ]; then
+      bash <(curl -s https://codecov.io/bash)
+    fi  
