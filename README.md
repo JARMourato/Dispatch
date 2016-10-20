@@ -17,7 +17,7 @@
 
 
 [![codebeat badge](https://codebeat.co/badges/b3876506-e737-4e78-b505-ed193a1e3869)](https://codebeat.co/projects/github-com-swiftification-dispatch)
-[![codecov](https://codecov.io/gh/DynamicThreads/Dispatch/branch/master/graph/badge.svg)](https://codecov.io/gh/DynamicThreads/Dispatch)
+[![codecov](https://codecov.io/gh/Swiftification/Dispatch/branch/master/graph/badge.svg)](https://codecov.io/gh/S/Dispatch)
 
 #### Note: 
 
