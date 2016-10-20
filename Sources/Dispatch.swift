@@ -125,7 +125,7 @@ public struct Semaphore {
   init() {
     self.init(value: 0)
   }
-  
+
   @discardableResult
   public func signal() -> Int {
     return semaphore.signal()
@@ -144,7 +144,7 @@ public struct Semaphore {
 }
 
 //MARK: - Dispatch
-//MARK: Main structure
+//MARK: - Main structure
 
 public struct Dispatch {
   fileprivate let currentItem: DispatchWorkItem
@@ -154,11 +154,11 @@ public struct Dispatch {
   }
 }
 
-//MARK: Chainable methods
+//MARK: - Chainable methods
 
 public extension Dispatch {
 
-  //MARK: Static methods
+  //MARK: - Static methods
 
   @discardableResult
   public static func async(_ queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
@@ -186,7 +186,7 @@ public extension Dispatch {
     return dispatch
   }
 
-  //MARK: Instance methods
+  //MARK: - Instance methods
 
   @discardableResult
   public func async(_ queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
@@ -211,8 +211,8 @@ public extension Dispatch {
     return chainClosure(queue: queue, closure: syncWrapper)
   }
 
-  //MARK: Private chaining helper method
-  
+  //MARK: - Private chaining helper method
+
   private func chainClosure(_ time: TimeInterval? = nil, queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
     let newDispatch = Dispatch(closure)
     let nextItem: DispatchWorkItem
@@ -229,7 +229,7 @@ public extension Dispatch {
 
 }
 
-//MARK: Non-Chainable Methods
+//MARK: - Non-Chainable Methods
 
 public extension Dispatch {
 
@@ -259,7 +259,7 @@ public extension Dispatch {
 
 }
 
-//MARK: Block methods
+//MARK: - Block methods
 
 public extension Dispatch {
   public func cancel() {

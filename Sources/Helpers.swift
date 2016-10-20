@@ -25,12 +25,12 @@
 import Foundation
 
 public extension Dispatch {
-  
+
   @discardableResult
   public static func sync(_ closure: @escaping DispatchClosure) -> Dispatch {
     return sync(Queue.main, closure: closure)
   }
-  
+
   @discardableResult
   public func sync(_ closure: @escaping DispatchClosure) -> Dispatch {
     return sync(Queue.main, closure: closure)
