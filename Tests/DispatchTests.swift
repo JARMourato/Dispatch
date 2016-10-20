@@ -24,7 +24,7 @@
 
 import XCTest
 
-@testable import DispatchFramework
+import DispatchFramework
 
 class DispatchTests: XCTestCase {
 
