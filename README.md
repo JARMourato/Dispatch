@@ -16,7 +16,7 @@
 ![Podspec](https://img.shields.io/cocoapods/v/Dispatch.svg)
 
 
-[![codebeat badge](https://codebeat.co/badges/b1709704-b1b6-40fa-a38f-0962f72aa264)](https://codebeat.co/projects/github-com-dynamicthreads-dispatch)
+[![codebeat badge](https://codebeat.co/badges/b3876506-e737-4e78-b505-ed193a1e3869)](https://codebeat.co/projects/github-com-swiftification-dispatch)
 [![codecov](https://codecov.io/gh/DynamicThreads/Dispatch/branch/master/graph/badge.svg)](https://codecov.io/gh/DynamicThreads/Dispatch)
 
 #### Note: 
