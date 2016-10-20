@@ -20,6 +20,20 @@
                ReferencedContainer = "container:Dispatch.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C43B84EA1CFDD6FA004537DD"
+               BuildableName = "Dispatch-iOS-Tests.xctest"
+               BlueprintName = "Dispatch-iOS-Tests"
+               ReferencedContainer = "container:Dispatch.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
