@@ -241,8 +241,10 @@ public extension Dispatch {
     queue.sync(flags: .barrier, execute: closure)
   }
 
-  public static func apply(_ iterations: Int, queue: DispatchQueue, closure: DispatchApplyClosure) {
-    DispatchQueue.concurrentPerform(iterations: iterations, execute: closure)
+  public static func apply(_ iterations: Int, queue: DispatchQueue, closure: @escaping DispatchApplyClosure) {
+    queue.async {
+        DispatchQueue.concurrentPerform(iterations: iterations, execute: closure)
+    }
   }
 
   public static func time(_ timeout: TimeInterval) -> DispatchTime {
