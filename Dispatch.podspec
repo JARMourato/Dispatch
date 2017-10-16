@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name             = "Dispatch"
-  s.version          = "2.0.2"
+  s.version          = "2.0.3"
   s.summary          = "Just a tiny library to make using GCD easier and intuitive"
-  s.homepage         = "https://github.com/Swiftification/Dispatch"
+  s.homepage         = "https://github.com/JARMourato/Dispatch"
   s.license          = 'MIT'
   s.author           = { "João Mourato" => "joao.armourato@gmail.com", "Gabriel Peart" => "hello@swiftification.org" }
-  s.source           = { :git => "https://github.com/Swiftification/Dispatch.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/JARMourato/Dispatch.git", :tag => s.version.to_s }
   s.ios.deployment_target = '8.0'
   s.osx.deployment_target = '10.10'
   s.tvos.deployment_target = '9.0'
