@@ -24,7 +24,7 @@
 
 import Foundation
 
-public typealias DispatchClosure = (Void) -> (Void)
+public typealias DispatchClosure = () -> (Void)
 public typealias DispatchApplyClosure = (Int) -> (Void)
 
 fileprivate var getTimeout: (_ time: TimeInterval) -> Int64 = { Int64($0 * Double(NSEC_PER_SEC)) }
