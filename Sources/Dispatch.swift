@@ -158,7 +158,7 @@ public struct Dispatch {
 
 public extension Dispatch {
 
-//MARK: - Static methods
+  //MARK: - Static methods
 
   @discardableResult
   public static func async(_ queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
