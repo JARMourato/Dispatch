@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Dispatch.podspec">
+   </FileRef>
+   <FileRef
       location = "group:Dispatch-iOS.playground">
    </FileRef>
    <FileRef

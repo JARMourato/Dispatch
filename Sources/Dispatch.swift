@@ -24,114 +24,122 @@
 
 import Foundation
 
-public typealias DispatchClosure = (Void) -> (Void)
+public typealias DispatchClosure = () -> (Void)
 public typealias DispatchApplyClosure = (Int) -> (Void)
 
-internal func getTimeout(time: NSTimeInterval) -> Int64 { return Int64(time * Double(NSEC_PER_SEC)) }
-internal var dispatchTimeCalc: (NSTimeInterval) -> (dispatch_time_t) = { dispatch_time(DISPATCH_TIME_NOW, getTimeout($0)) }
+fileprivate var getTimeout: (_ time: TimeInterval) -> Int64 = { Int64($0 * Double(NSEC_PER_SEC)) }
+fileprivate var dispatchTimeCalc: (TimeInterval) -> (DispatchTime) = { DispatchTime.now() + Double(getTimeout($0)) / Double(NSEC_PER_SEC) }
 
 //MARK: - Queue
 
 public enum Queue {
-    public enum Atribute {
-        static var concurrent: dispatch_queue_attr_t = DISPATCH_QUEUE_CONCURRENT
-        static var serial: dispatch_queue_attr_t = DISPATCH_QUEUE_SERIAL
-    }
+  public enum Atribute {
+    static var concurrent: DispatchQueue.Attributes = DispatchQueue.Attributes.concurrent
+    static var serial: DispatchQueue.Attributes = []
+  }
 
-    public enum Priority {
-        static var userInteractive: Int = Int(QOS_CLASS_USER_INTERACTIVE.rawValue)
-        static var userInitiated: Int = Int(QOS_CLASS_USER_INITIATED.rawValue)
-        static var utility: Int = Int(QOS_CLASS_UTILITY.rawValue)
-        static var background: Int = Int(QOS_CLASS_BACKGROUND.rawValue)
-    }
+  public enum Priority {
+    static var userInteractive: DispatchQoS.QoSClass = DispatchQoS.QoSClass.userInteractive
+    static var userInitiated: DispatchQoS.QoSClass = DispatchQoS.QoSClass.userInitiated
+    static var utility: DispatchQoS.QoSClass = DispatchQoS.QoSClass.utility
+    static var background: DispatchQoS.QoSClass = DispatchQoS.QoSClass.background
+  }
 
-    public static var main: dispatch_queue_t {
-        return dispatch_get_main_queue()
-    }
+  public static var main: DispatchQueue {
+    return DispatchQueue.main
+  }
 
-    public static var global: (dispatch_queue_priority_t) -> dispatch_queue_t = { priority in
-        return dispatch_get_global_queue(priority, 0)
-    }
+  public static var global: (DispatchQoS.QoSClass) -> DispatchQueue = { priority in
+    return DispatchQueue.global(qos: priority)
+  }
 
-    public static var custom: (String, dispatch_queue_attr_t) -> dispatch_queue_t = { identifier, attribute in
-        return dispatch_queue_create(identifier, attribute)
-    }
+  public static var custom: (String, DispatchQueue.Attributes) -> DispatchQueue = { identifier, attributes in
+    return DispatchQueue(label: identifier, attributes: attributes)
+  }
+
 }
 
 //MARK: - Group
 
 public struct Group {
-    public let group: dispatch_group_t = dispatch_group_create()
-    private var onceToken: Int32 = 0
+  public let group: DispatchGroup = DispatchGroup()
+  private var onceToken: Int32 = 0
 
-    public func enter() {
-        dispatch_group_enter(group)
-    }
+  public func enter() {
+    group.enter()
+  }
 
-    public func leave() {
-        dispatch_group_leave(group)
-    }
+  public func leave() {
+    group.leave()
+  }
 
-    public mutating func enterOnce() {
-        enter()
-        onceToken = 1
-    }
+  public mutating func enterOnce() {
+    enter()
+    onceToken = 1
+  }
 
-    public mutating func leaveOnce() -> Bool {
-        guard OSAtomicCompareAndSwapInt(1, 0, &onceToken) else { return false }
-        leave()
-        return true
-    }
+  @discardableResult
+  public mutating func leaveOnce() -> Bool {
+    guard OSAtomicCompareAndSwapInt(1, 0, &onceToken) else { return false }
+    leave()
+    return true
+  }
 
-    public func async(queue: dispatch_queue_t, closure: DispatchClosure) -> Group {
-        dispatch_group_async(group, queue) {
-            autoreleasepool(closure)
-        }
-        return self
+  @discardableResult
+  public func async(_ queue: DispatchQueue, closure: @escaping DispatchClosure) -> Group {
+    queue.async(group: group) {
+      autoreleasepool(invoking: closure)
     }
+    return self
+  }
 
-    public func notify(queue: dispatch_queue_t, closure: DispatchClosure) {
-        dispatch_group_notify(group, queue) {
-            autoreleasepool(closure)
-        }
+  public func notify(_ queue: DispatchQueue, closure: @escaping DispatchClosure) {
+    group.notify(queue: queue) {
+      autoreleasepool(invoking: closure)
     }
+  }
 
-    public func wait() {
-        dispatch_group_wait(group, DISPATCH_TIME_FOREVER)
-    }
+  @discardableResult
+  public func wait() -> DispatchTimeoutResult {
+    return group.wait(timeout: DispatchTime.distantFuture)
+  }
 
-    public func wait(timeout: NSTimeInterval) -> Int {
-        return dispatch_group_wait(group, dispatchTimeCalc(timeout))
-    }
+  @discardableResult
+  public func wait(_ timeout: TimeInterval) -> DispatchTimeoutResult {
+    return group.wait(timeout: dispatchTimeCalc(timeout))
+  }
 
 }
 
 //MARK: - Semaphore
 
 public struct Semaphore {
-    private let value: Int
-    let semaphore: dispatch_semaphore_t
+  private let value: Int
+  let semaphore: DispatchSemaphore
 
-    public init(value: Int) {
-        self.value = value
-        semaphore = dispatch_semaphore_create(value)
-    }
+  init(value: Int) {
+    self.value = value
+    semaphore = DispatchSemaphore(value: value)
+  }
 
-    public init() {
-        self.init(value: 0)
-    }
+  init() {
+    self.init(value: 0)
+  }
 
-    public func signal() -> Int {
-        return dispatch_semaphore_signal(semaphore)
-    }
+  @discardableResult
+  public func signal() -> Int {
+    return semaphore.signal()
+  }
 
-    public func wait() {
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
-    }
+  @discardableResult
+  public func wait() -> DispatchTimeoutResult {
+    return semaphore.wait(timeout: DispatchTime.distantFuture)
+  }
 
-    public func wait(timeout: NSTimeInterval) -> Int {
-        return dispatch_semaphore_wait(semaphore, dispatchTimeCalc(timeout))
-    }
+  @discardableResult
+  public func wait(_ timeout: TimeInterval) -> DispatchTimeoutResult {
+    return semaphore.wait(timeout: dispatchTimeCalc(timeout))
+  }
 
 }
 
@@ -139,77 +147,89 @@ public struct Semaphore {
 //MARK: - Main structure
 
 public struct Dispatch {
-    private let currentDispatchBlock: dispatch_block_t
-    private init(_ closure: DispatchClosure) {
-        let block = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS, closure)
-        currentDispatchBlock = block
-    }
+  fileprivate let currentItem: DispatchWorkItem
+  fileprivate init(_ closure: @escaping DispatchClosure) {
+    let item = DispatchWorkItem(flags: DispatchWorkItemFlags.inheritQoS, block: closure)
+    currentItem = item
+  }
 }
 
 //MARK: - Chainable methods
 
 public extension Dispatch {
 
-    //MARK: - Static methods
+//MARK: - Static methods
 
-    static func async(queue: dispatch_queue_t, closure: DispatchClosure) -> Dispatch {
-        let dispatch = Dispatch(closure)
-        dispatch_async(queue, dispatch.currentDispatchBlock)
-        return dispatch
+  @discardableResult
+  public static func async(_ queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
+    let dispatch = Dispatch(closure)
+    queue.async(execute: dispatch.currentItem)
+    return dispatch
+  }
+
+  @discardableResult
+  public static func sync(_ queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
+    let dispatch = Dispatch(closure)
+    if (queue == Queue.main) && Thread.isMainThread {
+      dispatch.currentItem.perform()
+    } else {
+      queue.sync(execute: dispatch.currentItem)
     }
+    return dispatch
+  }
 
-    static func sync(queue: dispatch_queue_t, closure: DispatchClosure) -> Dispatch {
-        let dispatch = Dispatch(closure)
-        dispatch_sync(queue, dispatch.currentDispatchBlock)
-        return dispatch
+  @discardableResult
+  public static func after(_ time: TimeInterval, closure: @escaping DispatchClosure) -> Dispatch {
+    return after(time, queue: Queue.main, closure: closure)
+  }
+
+  @discardableResult
+  public static func after(_ time: TimeInterval, queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
+    let dispatch = Dispatch(closure)
+    queue.asyncAfter(deadline: DispatchTime.now() + Double(getTimeout(time)) / Double(NSEC_PER_SEC), execute: dispatch.currentItem)
+    return dispatch
+  }
+
+  //MARK: - Instance methods
+
+  @discardableResult
+  public func async(_ queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
+    return chainClosure(queue: queue, closure: closure)
+  }
+
+  @discardableResult
+  public func after(_ time: TimeInterval, closure: @escaping DispatchClosure) -> Dispatch {
+    return after(time, queue: Queue.main, closure: closure)
+  }
+
+  @discardableResult
+  public func after(_ time: TimeInterval, queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
+    return chainClosure(time, queue: queue, closure: closure)
+  }
+
+  @discardableResult
+  public func sync(_ queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
+    let syncWrapper: DispatchClosure = {
+      queue.sync(execute: closure)
     }
+    return chainClosure(queue: queue, closure: syncWrapper)
+  }
 
-    static func after(time: NSTimeInterval, closure: DispatchClosure) -> Dispatch {
-        return after(time, queue: Queue.main, closure: closure)
+  //MARK: - Private chaining helper method
+
+  private func chainClosure(_ time: TimeInterval? = nil, queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
+    let newDispatch = Dispatch(closure)
+    let nextItem: DispatchWorkItem
+    if let time = time {
+      nextItem = DispatchWorkItem(flags: .inheritQoS) {
+        queue.asyncAfter(deadline: DispatchTime.now() + Double(getTimeout(time)) / Double(NSEC_PER_SEC), execute: newDispatch.currentItem)
+      }
+    } else {
+      nextItem = newDispatch.currentItem
     }
-
-    static func after(time: NSTimeInterval, queue: dispatch_queue_t, closure: DispatchClosure) -> Dispatch {
-        let dispatch = Dispatch(closure)
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, getTimeout(time)), queue, dispatch.currentDispatchBlock)
-        return dispatch
-    }
-
-    //MARK: - Instance methods
-
-    func async(queue: dispatch_queue_t, closure: DispatchClosure) -> Dispatch {
-        return chainClosure(queue: queue, closure: closure)
-    }
-
-    func after(time: NSTimeInterval, closure: DispatchClosure) -> Dispatch {
-        return after(time, queue: Queue.main, closure: closure)
-    }
-
-    func after(time: NSTimeInterval, queue: dispatch_queue_t, closure: DispatchClosure) -> Dispatch {
-        return chainClosure(time, queue: queue, closure: closure)
-    }
-
-    func sync(queue: dispatch_queue_t, closure: DispatchClosure) -> Dispatch {
-        let syncWrapper: DispatchClosure = {
-            dispatch_sync(queue, closure)
-        }
-        return chainClosure(queue: queue, closure: syncWrapper)
-    }
-
-    //MARK: - Private chaining helper method
-
-    private func chainClosure(time: NSTimeInterval? = nil, queue: dispatch_queue_t, closure: DispatchClosure) -> Dispatch {
-        let newDispatch = Dispatch(closure)
-        let next_dispatch_block: dispatch_block_t
-        if let time = time {
-            next_dispatch_block = dispatch_block_create(DISPATCH_BLOCK_INHERIT_QOS_CLASS) {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, getTimeout(time)), queue, newDispatch.currentDispatchBlock)
-            }
-        } else {
-            next_dispatch_block = newDispatch.currentDispatchBlock
-        }
-        dispatch_block_notify(currentDispatchBlock, queue, next_dispatch_block)
-        return newDispatch
-    }
+    currentItem.notify(queue: queue, execute: nextItem)
+    return newDispatch
+  }
 
 }
 
@@ -217,47 +237,48 @@ public extension Dispatch {
 
 public extension Dispatch {
 
-    static func once(inout token: dispatch_once_t, closure: DispatchClosure) {
-        dispatch_once(&token, closure)
-    }
+  public static func barrierAsync(_ queue: DispatchQueue, closure: @escaping DispatchClosure) {
+    queue.async(flags: .barrier, execute: closure)
+  }
 
-    static func barrierAsync(queue: dispatch_queue_t, closure: DispatchClosure) {
-        dispatch_barrier_async(queue, closure)
-    }
+  public static func barrierSync(_ queue: DispatchQueue, closure: DispatchClosure) {
+    queue.sync(flags: .barrier, execute: closure)
+  }
 
-    static func barrierSync(queue: dispatch_queue_t, closure: DispatchClosure) {
-        dispatch_barrier_sync(queue, closure)
+  public static func apply(_ iterations: Int, queue: DispatchQueue, closure: @escaping DispatchApplyClosure) {
+    queue.async {
+        DispatchQueue.concurrentPerform(iterations: iterations, execute: closure)
     }
+  }
 
-    static func apply(iterations: Int, queue: dispatch_queue_t, closure: DispatchApplyClosure) {
-        dispatch_apply(iterations, queue, closure)
-    }
+  public static func time(_ timeout: TimeInterval) -> DispatchTime {
+    return dispatchTimeCalc(timeout)
+  }
 
-    static func time(timeout: NSTimeInterval) -> dispatch_time_t {
-        return dispatchTimeCalc(timeout)
-    }
+  public static var group: Group {
+    return Group()
+  }
 
-    static var group: Group {
-        return Group()
-    }
+  public static func semaphore(_ value: Int = 0) -> Semaphore {
+    return Semaphore(value: value)
+  }
 
-    static func semaphore(value: Int = 0) -> Semaphore {
-        return Semaphore(value: value)
-    }
 }
 
 //MARK: - Block methods
 
 public extension Dispatch {
-    public func cancel() {
-        dispatch_block_cancel(currentDispatchBlock)
-    }
+  public func cancel() {
+    currentItem.cancel()
+  }
 
-    public func wait() {
-        dispatch_block_wait(currentDispatchBlock, DISPATCH_TIME_FOREVER)
-    }
+  @discardableResult
+  public func wait() -> DispatchTimeoutResult {
+    return currentItem.wait(timeout: DispatchTime.distantFuture)
+  }
 
-    public func wait(timeout: NSTimeInterval) -> Int {
-        return dispatch_block_wait(currentDispatchBlock, dispatchTimeCalc(timeout))
-    }
+  @discardableResult
+  public func wait(_ timeout: TimeInterval) -> DispatchTimeoutResult {
+    return currentItem.wait(timeout: dispatchTimeCalc(timeout))
+  }
 }

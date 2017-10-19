@@ -26,50 +26,71 @@ import Foundation
 
 public extension Dispatch {
 
-    static func async(closure: DispatchClosure) -> Dispatch {
-        return async(Queue.main, closure: closure)
-    }
+  @discardableResult
+  public static func sync(_ closure: @escaping DispatchClosure) -> Dispatch {
+    return sync(Queue.main, closure: closure)
+  }
 
-    public func async(closure: DispatchClosure) -> Dispatch {
-        return async(Queue.main, closure: closure)
-    }
+  @discardableResult
+  public func sync(_ closure: @escaping DispatchClosure) -> Dispatch {
+    return sync(Queue.main, closure: closure)
+  }
 
-    static func asyncBackground(closure: DispatchClosure) -> Dispatch {
-        return async(Queue.globalBackground, closure: closure)
-    }
+  @discardableResult
+  public static func async(_ closure: @escaping DispatchClosure) -> Dispatch {
+    return async(Queue.main, closure: closure)
+  }
 
-    func asyncBackground(closure: DispatchClosure) -> Dispatch {
-        return async(Queue.globalBackground, closure: closure)
-    }
+  @discardableResult
+  public func async(_ closure: @escaping DispatchClosure) -> Dispatch {
+    return async(Queue.main, closure: closure)
+  }
 
-    static func asyncUtility(closure: DispatchClosure) -> Dispatch {
-        return async(Queue.globalUtility, closure: closure)
-    }
+  @discardableResult
+  public static func asyncBackground(_ closure: @escaping DispatchClosure) -> Dispatch {
+    return async(Queue.globalBackground, closure: closure)
+  }
 
-    func asyncUtility(closure: DispatchClosure) -> Dispatch {
-        return async(Queue.globalUtility, closure: closure)
-    }
+  @discardableResult
+  public func asyncBackground(_ closure: @escaping DispatchClosure) -> Dispatch {
+    return async(Queue.globalBackground, closure: closure)
+  }
 
-    static func asyncUserInitiated(closure: DispatchClosure) -> Dispatch {
-        return async(Queue.globalUserInitiated, closure: closure)
-    }
+  @discardableResult
+  public static func asyncUtility(_ closure: @escaping DispatchClosure) -> Dispatch {
+    return async(Queue.globalUtility, closure: closure)
+  }
 
-    func asyncUserInitiated(closure: DispatchClosure) -> Dispatch {
-        return async(Queue.globalUserInitiated, closure: closure)
-    }
+  @discardableResult
+  public func asyncUtility(_ closure: @escaping DispatchClosure) -> Dispatch {
+    return async(Queue.globalUtility, closure: closure)
+  }
 
-    static func asyncUserInteractive(closure: DispatchClosure) -> Dispatch {
-        return async(Queue.globalUserInteractive, closure: closure)
-    }
+  @discardableResult
+  public static func asyncUserInitiated(_ closure: @escaping DispatchClosure) -> Dispatch {
+    return async(Queue.globalUserInitiated, closure: closure)
+  }
 
-    func asyncUserInteractive(closure: DispatchClosure) -> Dispatch {
-        return async(Queue.globalUserInteractive, closure: closure)
-    }
+  @discardableResult
+  public func asyncUserInitiated(_ closure: @escaping DispatchClosure) -> Dispatch {
+    return async(Queue.globalUserInitiated, closure: closure)
+  }
+
+  @discardableResult
+  public static func asyncUserInteractive(_ closure: @escaping DispatchClosure) -> Dispatch {
+    return async(Queue.globalUserInteractive, closure: closure)
+  }
+
+  @discardableResult
+  public func asyncUserInteractive(_ closure: @escaping DispatchClosure) -> Dispatch {
+    return async(Queue.globalUserInteractive, closure: closure)
+  }
+
 }
 
 public extension Queue {
-    static var globalUserInteractive: dispatch_queue_t { return global(Queue.Priority.userInteractive) }
-    static var globalUserInitiated: dispatch_queue_t { return global(Queue.Priority.userInitiated) }
-    static var globalUtility: dispatch_queue_t { return global(Queue.Priority.utility) }
-    static var globalBackground: dispatch_queue_t { return global(Queue.Priority.background) }
+  public static var globalUserInteractive: DispatchQueue { return global(Queue.Priority.userInteractive) }
+  public static var globalUserInitiated: DispatchQueue { return global(Queue.Priority.userInitiated) }
+  public static var globalUtility: DispatchQueue { return global(Queue.Priority.utility) }
+  public static var globalBackground: DispatchQueue { return global(Queue.Priority.background) }
 }

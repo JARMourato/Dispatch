@@ -8,6 +8,8 @@ codecov:
     require_ci_to_pass: yes
 
   coverage:
+    ignore:
+      - Tests/.*
     precision: 2
     round: down
     range: 70...100

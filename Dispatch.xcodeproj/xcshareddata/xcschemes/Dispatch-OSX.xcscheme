@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0730"
+   LastUpgradeVersion = "0800"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -17,6 +17,20 @@
                BlueprintIdentifier = "C43B84CD1CFDD2AA004537DD"
                BuildableName = "DispatchFramework.framework"
                BlueprintName = "Dispatch-OSX"
+               ReferencedContainer = "container:Dispatch.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C43B84F91CFDD70D004537DD"
+               BuildableName = "Dispatch-OSX-Tests.xctest"
+               BlueprintName = "Dispatch-OSX-Tests"
                ReferencedContainer = "container:Dispatch.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

@@ -24,48 +24,49 @@
 
 import XCTest
 
-@testable import DispatchFramework
+import DispatchFramework
 
 class DispatchTests: XCTestCase {
 
-    override func setUp() {
-        super.setUp()
+  override func setUp() {
+    super.setUp()
+  }
+
+  override func tearDown() {
+    super.tearDown()
+  }
+
+  func testBasicAsync() {
+    let expectationBasic = expectation(description: "Wait for Dispatch Async")
+    let delay = 1.0
+
+    Dispatch.after(delay) {
+      expectationBasic.fulfill()
     }
+    waitForExpectations(timeout: delay, handler: nil)
+  }
 
-    override func tearDown() {
-        super.tearDown()
+  func testBasicChain() {
+    let expectationAfter = expectation(description: "Wait for Dispatch Chain Async After")
+    let expectationAsync = expectation(description: "Wait for Dispatch Chain Async Main")
+    let delay = 1.0
+    var operation: Int = 1
+    var hasPassedByAsync = false
+
+    Dispatch.after(delay) {
+      if hasPassedByAsync {
+        XCTFail("This should be the first block to be executed")
+        return
+      }
+      XCTAssertEqual(operation, 1, "This should be the first block to be executed")
+      operation = 2
+      expectationAfter.fulfill()
+    }.async {
+      hasPassedByAsync = true
+      XCTAssertEqual(operation, 2, "This should be the second block to be executed")
+      expectationAsync.fulfill()
     }
+    waitForExpectations(timeout: delay + 1, handler: nil)
+  }
 
-    func testBasicAsync() {
-        let expectation = expectationWithDescription("Wait for Dispatch Async")
-        let delay = 1.0
-
-        Dispatch.after(delay) {
-            expectation.fulfill()
-        }
-        waitForExpectationsWithTimeout(delay, handler: nil)
-    }
-
-    func testBasicChain() {
-        let expectationAfter = expectationWithDescription("Wait for Dispatch Chain Async After")
-        let expectationAsync = expectationWithDescription("Wait for Dispatch Chain Async Main")
-        let delay = 1.0
-        var operation: Int = 1
-        var hasPassedByAsync = false
-
-        Dispatch.after(delay) {
-            if hasPassedByAsync {
-                XCTFail("This should be the first block to be executed")
-                return
-            }
-            XCTAssertEqual(operation, 1, "This should be the first block to be executed")
-            operation = 2
-            expectationAfter.fulfill()
-            }.async {
-                hasPassedByAsync = true
-                XCTAssertEqual(operation, 2, "This should be the second block to be executed")
-                expectationAsync.fulfill()
-        }
-        waitForExpectationsWithTimeout(delay + 1, handler: nil)
-    }
 }
