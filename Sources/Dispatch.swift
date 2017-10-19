@@ -158,7 +158,7 @@ public struct Dispatch {
 
 public extension Dispatch {
 
-  //MARK: - Static methods
+//MARK: - Static methods
 
   @discardableResult
   public static func async(_ queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
@@ -170,13 +170,17 @@ public extension Dispatch {
   @discardableResult
   public static func sync(_ queue: DispatchQueue, closure: @escaping DispatchClosure) -> Dispatch {
     let dispatch = Dispatch(closure)
-    queue.sync(execute: dispatch.currentItem)
+    if (queue == Queue.main) && Thread.isMainThread {
+      dispatch.currentItem.perform()
+    } else {
+      queue.sync(execute: dispatch.currentItem)
+    }
     return dispatch
   }
 
   @discardableResult
   public static func after(_ time: TimeInterval, closure: @escaping DispatchClosure) -> Dispatch {
-     return after(time, queue: Queue.main, closure: closure)
+    return after(time, queue: Queue.main, closure: closure)
   }
 
   @discardableResult
