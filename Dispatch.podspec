@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "Dispatch"
-  s.version          = "2.0.3"
+  s.version          = "2.0.4"
   s.summary          = "Just a tiny library to make using GCD easier and intuitive"
   s.homepage         = "https://github.com/JARMourato/Dispatch"
   s.license          = 'MIT'
